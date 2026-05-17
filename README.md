@@ -1,72 +1,70 @@
-# Taskflow - Aplikasi Todo Full Stack
+# Taskflow - Full Stack Todo Application
 
-Aplikasi web todo list full stack yang dibangun untuk Industrix Full Stack Engineer Intern Coding Challenge.
+A full-stack todo list web application built for the Industrix Full Stack Engineer Intern Coding Challenge.
 
-## Gambaran Umum
+## Overview
 
-Aplikasi ini menampilkan keterampilan pengembangan full stack dengan menggunakan:
+This application demonstrates core full-stack development skills using:
 - **Frontend**: React 19 + TypeScript + Vite + Ant Design
 - **Backend**: Go + Gin + GORM
 - **Database**: PostgreSQL
 - **Containerization**: Docker & Docker Compose
 
-## Fitur yang Diimplementasikan
+## Features Implemented
 
-### Fitur Inti (45 poin)
-- [x] Create, Read, Update, Delete (CRUD) untuk todos
-- [x] Menandai todos sebagai selesai/belum selesai
-- [x] Kategori todo dengan warna kustom
-- [x] Pagination dasar (6 item per halaman)
-- [x] Mencari todos berdasarkan judul
+### Core Features (45 points)
+- [x] Create, Read, Update, Delete (CRUD) for todos
+- [x] Mark todos as completed/incomplete
+- [x] Todo categories with custom colors
+- [x] Basic pagination (6 items per page)
+- [x] Search todos by title
 
-### Fitur Bonus
-- [x] **Backend Unit Tests** (+10 poin) - Tes komprehensif untuk todo dan category services
-- [x] **Frontend Unit Tests** (+5 poin) - Tes dengan Vitest untuk API, Context, dan komponen
-- [x] **React Context API** (+6 poin) - Implementasi state management lengkap
-- [x] **Advanced Filtering** (+5 poin) - Filter berdasarkan status, kategori, priority
-- [x] **Docker** (+3 poin) - Backend, frontend, dan database dalam container
-- [x] **TypeScript** (+2 poin) - Implementasi TypeScript penuh di frontend
+### Bonus Features
+- [x] **Backend Unit Tests** (+10 points) - Comprehensive tests for todo and category services
+- [x] **Frontend Unit Tests** (+5 points) - Tests with Vitest for API, Context, and components
+- [x] **React Context API** (+6 points) - Full state management implementation
+- [x] **Advanced Filtering** (+5 points) - Filter by completion status, category, priority
+- [x] **Docker** (+3 points) - Containerized backend, frontend, and database
+- [x] **TypeScript** (+2 points) - Full TypeScript implementation on frontend
 
-## Cara Menjalankan
+## Getting Started
 
-### Prasyarat
-- Docker Desktop untuk Windows
+### Prerequisites
+- Docker Desktop for Windows
 - Git
+- Go 1.26+ (for local backend)
+- Node.js 20+ (for local frontend)
+- PostgreSQL 15+ (for local database)
 
-### Opsi 1: Menjalankan dengan Docker (Disarankan)
+### Option 1: Run with Docker (Recommended)
 
 ```powershell
-# Clone repository dan masuk ke direktori project
+# Clone the repository and navigate to project directory
 cd todo_app
 
-# Mulai semua layanan (PostgreSQL, Backend, Frontend)
+# Start all services (PostgreSQL, Backend, Frontend)
 docker-compose up --build
 ```
 
-Layanan akan tersedia di:
+Services will be available at:
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:8080/api
 - **PostgreSQL**: localhost:5432
 
-### Opsi 2: Menjalankan Lokal (Tanpa Docker)
+### Option 2: Run Locally (Without Docker)
 
-#### Prerequisites
-- Go 1.26+
-- Node.js 20+
-- PostgreSQL 15+
+#### Step 1: Setup PostgreSQL
 
-#### Langkah 1: Setup Database PostgreSQL
-
-**Windows (menggunakan pgAdmin atau command line):**
+**Windows (using pgAdmin or command line):**
 ```powershell
-# Buat database
+# Create database
 createdb -U postgres todo_app
 
-# Atau dengan psql
+# Or with psql
 psql -U postgres -c "CREATE DATABASE todo_app;"
 ```
 
-**Untuk koneksi lokal, update file `backend/.env`:**
+**For local connection, update `backend/.env`:**
 ```env
 DB_HOST=localhost
 DB_PORT=5432
@@ -76,7 +74,7 @@ DB_NAME=todo_app
 PORT=8080
 ```
 
-#### Langkah 2: Jalankan Backend
+#### Step 2: Run Backend
 
 ```powershell
 cd backend
@@ -84,13 +82,13 @@ cd backend
 # Install dependencies
 go mod download
 
-# Jalankan server
+# Run the server
 go run cmd/api/main.go
 ```
 
-Backend akan berjalan di: http://localhost:8080
+Backend will run at: http://localhost:8080
 
-#### Langkah 3: Jalankan Frontend
+#### Step 3: Run Frontend
 
 ```powershell
 cd frontend
@@ -98,49 +96,49 @@ cd frontend
 # Install dependencies
 npm install
 
-# Jalankan development server
+# Run development server
 npm run dev
 ```
 
-Frontend akan berjalan di: http://localhost:5173
+Frontend will run at: http://localhost:5173
 
-> **Catatan**: Pastikan PostgreSQL sudah running sebelum menjalankan backend.
+> **Note**: Make sure PostgreSQL is running before starting the backend.
 
-## Menjalankan Tes
+## Running Tests
 
 ### Backend Unit Tests
 ```powershell
 cd backend
 
-# Jalankan semua tes
+# Run all tests
 go test ./internal/services/... -v
 
-# Jalankan file tes tertentu
+# Run specific test file
 go test ./internal/services/todo_service_test.go -v
 ```
 
-Backend mencakup 25+ unit tes yang mencakup:
-- Operasi CRUD Todo
-- Operasi CRUD Category
-- Validasi (judul wajib diisi, validasi priority)
-- Error handling (tidak ditemukan, ID tidak valid)
-- Filter dan fungsi pencarian
+Backend includes 25+ unit tests covering:
+- Todo CRUD operations
+- Category CRUD operations
+- Validation (title required, priority validation)
+- Error handling (not found, invalid ID)
+- Filter and search functionality
 
 ### Frontend Tests (Unit Tests)
 ```powershell
 cd frontend
 
-# Jalankan unit tests (single run)
+# Run unit tests (single run)
 npm run test:run
 
-# Jalankan unit tests (watch mode)
+# Run unit tests (watch mode)
 npm test
 ```
 
-**Frontend mencakup 33+ unit tes yang mencakup:**
-- API functions (getTodos, createTodo, updateTodo, deleteTodo, dll.)
+**Frontend includes 33+ unit tests covering:**
+- API functions (getTodos, createTodo, updateTodo, deleteTodo, etc.)
 - Context state management (fetch, create, update, delete, toggle, filters)
-- Komponen TodoItem (rendering, checkbox, priority, completed state)
+- TodoItem component (rendering, checkbox, priority, completed state)
 
 **Test Files:**
 - `src/services/api.test.ts` - API service tests
@@ -153,34 +151,34 @@ cd frontend
 npm run lint
 ```
 
-## Dokumentasi API
+## API Documentation
 
 ### Base URL
 ```
 http://localhost:8080/api
 ```
 
-### Endpoint Todos
+### Todos Endpoints
 
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| GET | `/todos` | List todos dengan pagination & filters |
-| POST | `/todos` | Buat todo baru |
-| GET | `/todos/:id` | Ambil todo spesifik |
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/todos` | List todos with pagination & filters |
+| POST | `/todos` | Create new todo |
+| GET | `/todos/:id` | Get specific todo |
 | PUT | `/todos/:id` | Update todo |
-| DELETE | `/todos/:id` | Hapus todo |
-| PATCH | `/todos/:id/complete` | Toggle status selesai |
+| DELETE | `/todos/:id` | Delete todo |
+| PATCH | `/todos/:id/complete` | Toggle completion |
 
-#### Parameter Query GET /todos
-| Parameter | Tipe | Deskripsi |
-|-----------|------|-----------|
-| page | int | Nomor halaman (default: 1) |
-| limit | int | Item per halaman (default: 6) |
-| search | string | Cari berdasarkan judul |
-| filterBy | string | Tipe filter: completed, category_id, priority |
-| filterValue | string | Nilai filter |
+#### GET /todos Query Parameters
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| page | int | Page number (default: 1) |
+| limit | int | Items per page (default: 6) |
+| search | string | Search by title |
+| filterBy | string | Filter type: completed, category_id, priority |
+| filterValue | string | Filter value |
 
-#### Format Response
+#### Response Format
 ```json
 {
   "data": [
@@ -210,17 +208,17 @@ http://localhost:8080/api
 }
 ```
 
-### Endpoint Categories
+### Categories Endpoints
 
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| GET | `/categories` | List semua categories |
-| POST | `/categories` | Buat category baru |
-| GET | `/categories/:id` | Ambil category spesifik |
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/categories` | List all categories |
+| POST | `/categories` | Create new category |
+| GET | `/categories/:id` | Get specific category |
 | PUT | `/categories/:id` | Update category |
-| DELETE | `/categories/:id` | Hapus category |
+| DELETE | `/categories/:id` | Delete category |
 
-#### Request POST /categories
+#### POST /categories Request
 ```json
 {
   "name": "New Category",
@@ -230,46 +228,46 @@ http://localhost:8080/api
 
 ---
 
-## Pertanyaan Teknis
+## Technical Questions
 
-### Pertanyaan Desain Database
+### Database Design Questions
 
-#### 1. Tabel database apa yang dibuat dan mengapa?
+#### 1. What database tables did you create and why?
 
-Saya membuat dua tabel dengan hubungan one-to-many:
+I created two tables with a one-to-many relationship:
 
-**tabel categories**
-- `id` (SERIAL PRIMARY KEY) - Identifier unik
-- `name` (VARCHAR) - Nama kategori
-- `color` (VARCHAR) - Kode warna hex untuk tampilan UI
-- `created_at` (TIMESTAMP) - Untuk audit trail
+**categories table**
+- `id` (SERIAL PRIMARY KEY) - Unique identifier
+- `name` (VARCHAR) - Category name
+- `color` (VARCHAR) - Hex color code for UI display
+- `created_at` (TIMESTAMP) - For audit trail
 
-**tabel todos**
-- `id` (SERIAL PRIMARY KEY) - Identifier unik
-- `title` (VARCHAR, NOT NULL) - Judul todo (wajib diisi)
-- `description` (TEXT) - Deskripsi opsional
-- `completed` (BOOLEAN) - Status penyelesaian
-- `category_id` (INTEGER, FK) - Menghubungi ke tabel categories
+**todos table**
+- `id` (SERIAL PRIMARY KEY) - Unique identifier
+- `title` (VARCHAR, NOT NULL) - Todo title (required)
+- `description` (TEXT) - Optional detailed description
+- `completed` (BOOLEAN) - Completion status
+- `category_id` (INTEGER, FK) - Links to categories table
 - `priority` (VARCHAR) - high/medium/low
-- `due_date` (TIMESTAMP) - Tanggal jatuh tempo opsional
-- `created_at`, `updated_at` (TIMESTAMP) - Field audit
+- `due_date` (TIMESTAMP) - Optional due date
+- `created_at`, `updated_at` (TIMESTAMP) - Audit fields
 
-Hubungan: Satu kategori bisa memiliki banyak todos (1:N). Penghapusan kategori mengatur todo's category_id ke NULL (ON DELETE SET NULL) untuk menjaga data todo.
+The relationship: One category can have many todos (1:N). Category deletion sets todo's category_id to NULL (ON DELETE SET NULL) to preserve todo data.
 
-#### 2. Bagaimana cara menangani pagination dan filtering di database?
+#### 2. How did you handle pagination and filtering in the database?
 
 **Pagination:**
-- Menggunakan GORM's `Limit()` dan `Offset()` methods
-- Offset dihitung: `(page - 1) * limit`
-- Mengembalikan total count untuk UI pagination frontend
+- Used GORM's `Limit()` and `Offset()` methods
+- Calculated offset: `(page - 1) * limit`
+- Returned total count for frontend pagination UI
 
 **Filtering:**
-- Pencarian: `WHERE title ILIKE '%search%'` (case-insensitive)
-- Status selesai: `WHERE completed = true/false`
-- Kategori: `WHERE category_id = ?`
+- Search: `WHERE title ILIKE '%search%'` (case-insensitive)
+- Completed status: `WHERE completed = true/false`
+- Category: `WHERE category_id = ?`
 - Priority: `WHERE priority = ?`
 
-**Indeks yang ditambahkan:**
+**Indexes added:**
 ```sql
 CREATE INDEX idx_todos_category_id ON todos(category_id);
 CREATE INDEX idx_todos_completed ON todos(completed);
@@ -277,33 +275,33 @@ CREATE INDEX idx_todos_priority ON todos(priority);
 CREATE INDEX idx_todos_created_at ON todos(created_at DESC);
 ```
 
-Indeks ini meningkatkan performa query untuk operasi filtering dan sorting.
+These indexes improve query performance for filtering and sorting operations.
 
 ---
 
-### Pertanyaan Keputusan Teknis
+### Technical Decision Questions
 
-#### 1. Bagaimana cara mengimplementasikan responsive design?
+#### 1. How did you implement responsive design?
 
-**Breakpoints yang digunakan:**
+**Breakpoints used:**
 - Mobile: < 576px
 - Tablet: 576px - 991px
 - Desktop: >= 992px
 
-**Komponen Ant Design:**
-- `Layout` - Container utama dengan padding responsif
-- `Tabs` - Navigasi tab yang menumpuk di mobile
-- `Table` / `List` - Tampilan data responsif
-- `Button` - Ukuran adaptif
-- `Input` - Input dengan lebar fleksibel
+**Ant Design components:**
+- `Layout` - Main container with responsive padding
+- `Tabs` - Tab navigation that stacks on mobile
+- `Table` / `List` - Responsive data display
+- `Button` - Adaptive sizing
+- `Input` - Fluid width inputs
 
-**Pendekatan CSS:**
-- Menggunakan CSS custom properties untuk theming
-- Media queries untuk layout per breakpoint
-- Flexbox/Grid untuk layout fleksibel
-- Lebar berbasis persentase dengan max-width
+**CSS approach:**
+- Used CSS custom properties for theming
+- Media queries for breakpoint-specific layouts
+- Flexbox/Grid for flexible layouts
+- Percentage-based widths with max-width constraints
 
-Contoh dari Home.tsx:
+Example from Home.tsx:
 ```css
 @media (min-width: 992px) {
   .toolbar-top {
@@ -313,9 +311,9 @@ Contoh dari Home.tsx:
 }
 ```
 
-#### 2. Bagaimana cara menyusun komponen React?
+#### 2. How did you structure your React components?
 
-**Hierarki Komponen:**
+**Component Hierarchy:**
 ```
 App.tsx
 ├── TodoProvider (Context)
@@ -330,151 +328,151 @@ App.tsx
 ```
 
 **State Management:**
-- React Context API (`TodoContext.tsx`) untuk state global
-- State meliputi: todos, categories, pagination, filters, loading, error
+- React Context API (`TodoContext.tsx`) for global state
+- State includes: todos, categories, pagination, filters, loading, error
 - Actions: fetchTodos, createTodo, updateTodo, deleteTodo, toggleComplete
 - Category actions: fetchCategories, createCategory, updateCategory, deleteCategory
 
-**Filtering dan Pagination:**
-- State pagination dikelola di Context dengan objek `pagination`
-- Filter disimpan di state object `filters`
-- Panggilan API menyertakan parameter page, limit, dan filter
-- Komponen UI memicu context actions untuk update state
+**Filtering and Pagination:**
+- Pagination state managed in Context with `pagination` object
+- Filters stored in `filters` state object
+- API calls include page, limit, and filter params
+- UI components trigger context actions for state updates
 
-#### 3. Arsitektur backend apa yang dipilih dan mengapa?
+#### 3. What backend architecture did you choose and why?
 
-**Arsitektur Berlapis:**
+**Layered Architecture:**
 
 ```
-cmd/api/main.go          - Entry point, setup DI
-internal/handlers/       - Layer HTTP, handling request/response
-internal/services/       - Layer business logic
-internal/repository/    - Layer data access
+cmd/api/main.go          - Entry point, DI setup
+internal/handlers/       - HTTP layer, request/response handling
+internal/services/       - Business logic layer
+internal/repository/    - Data access layer
 internal/models/         - Data models
-internal/config/         - Konfigurasi
-internal/middleware/    - CORS, dll.
+internal/config/         - Configuration
+internal/middleware/    - CORS, auth, etc.
 ```
 
-**Mengapa struktur ini:**
-- **Separation of concerns** - Setiap layer punya tanggung jawab spesifik
-- **Testability** - Services dapat diuji dengan mock repositories
-- **Maintainability** - Mudah menemukan dan mengubah kode
-- **Scalability** - Batas bersih memungkinkan evolusi layer independen
+**Why this structure:**
+- **Separation of concerns** - Each layer has specific responsibility
+- **Testability** - Services can be tested with mock repositories
+- **Maintainability** - Easy to locate and modify code
+- **Scalability** - Clean boundaries allow independent layer evolution
 
 **API Routes:**
-- Konvensi RESTful dengan HTTP verbs yang tepat
-- Dikelompokkan di bawah prefix `/api`
-- Berbasis resource: `/todos`, `/categories`
+- RESTful conventions with proper HTTP verbs
+- Grouped under `/api` prefix
+- Resource-based: `/todos`, `/categories`
 - Actions: `PATCH /todos/:id/complete`
 
 **Error Handling:**
-- Try-catch di handlers dengan response error JSON
-- Validasi di services (judul wajib, priority valid)
-- Error database disampaikan ke atas dengan pesan bermakna
+- Try-catch in handlers with JSON error responses
+- Validation in services (title required, valid priority)
+- Database errors propagated up with meaningful messages
 
-#### 4. Bagaimana cara menangani validasi data?
+#### 4. How did you handle data validation?
 
 **Backend (Go):**
-- Handler menggunakan `gin.Binding` untuk validasi request
-- Field judul ditandai sebagai `binding:"required"`
-- Validasi tambahan di service layer:
-  - Judul tidak boleh kosong
-  - Priority harus: high, medium, atau low (default: medium)
-  - Category harus ada saat disediakan
-- Pesan error yang tepat dikembalikan sebagai JSON
+- Handler uses `gin.Binding` for request validation
+- Title field marked as `binding:"required"`
+- Service layer additional validation:
+  - Title must not be empty
+  - Priority must be: high, medium, or low (default: medium)
+  - Category must exist when provided
+- Proper error messages returned as JSON
 
 **Frontend (React):**
-- Validasi form menggunakan Ant Design's `Form` component
-- Indikator field wajib
-- Type checking dengan TypeScript interfaces
-- Error handling API dengan try-catch dan feedback pengguna
+- Form validation using Ant Design's `Form` component
+- Required field indicators
+- Type checking with TypeScript interfaces
+- API error handling with try-catch and user feedback
 
-**Rules Validasi:**
-| Field | Aturan |
-|-------|--------|
-| Title | Wajib, max 255 karakter |
-| Description | Opsional, max 1000 karakter |
+**Validation Rules:**
+| Field | Rule |
+|-------|------|
+| Title | Required, max 255 chars |
+| Description | Optional, max 1000 chars |
 | Priority | Enum: high, medium, low (default: medium) |
-| Category | Opsional, harus ada di database |
-| Due Date | Opsional, timestamp valid |
+| Category | Optional, must exist in database |
+| Due Date | Optional, valid timestamp |
 
 ---
 
-### Pertanyaan Testing & Quality
+### Testing & Quality Questions
 
-#### 1. Apa yang dipilih untuk diuji dan mengapa?
+#### 1. What did you choose to unit test and why?
 
-**Backend Services (fokus utama - 25+ tes):**
+**Backend Services (primary focus - 25+ tests):**
 
-| Cakupan Tes | Alasan |
-|-------------|--------|
-| Todo Create | Fungsi inti, rules validasi |
+| Test Coverage | Rationale |
+|---------------|-----------|
+| Todo Create | Core functionality, validation rules |
 | Todo Update | Edge cases, partial updates |
-| Todo Delete | Penghapusan yang tepat, error handling |
+| Todo Delete | Proper deletion, error handling |
 | Todo GetAll | Pagination, filtering, search |
-| Todo ToggleComplete | Perubahan state |
-| Category CRUD | Paralel dengan todo tests |
-| Validation | Judul wajib, enum priority |
-| Error cases | Tidak ditemukan, ID tidak valid |
+| Todo ToggleComplete | State changes |
+| Category CRUD | Parallel to todo tests |
+| Validation | Title required, priority enum |
+| Error cases | Not found, invalid ID |
 
-**Struktur Tes:**
-- Mock repositories menggunakan testify/mock
-- Table-driven tests untuk beberapa skenario
-- Assertions komprehensif untuk perilaku yang diharapkan
+**Test Structure:**
+- Mock repositories using testify/mock
+- Table-driven tests for multiple scenarios
+- Comprehensive assertions for expected behavior
 
-**Mengapa Tes Backend:**
-- Backend berisi sebagian besar business logic
-- Operasi database butuh cakupan
-- Bonus points untuk backend unit tests (+10)
-- Verifikasi critical path
+**Why Backend Tests:**
+- Backend contains most business logic
+- Database operations need coverage
+- Bonus points for backend unit tests (+10)
+- Critical path verification
 
 **Frontend Tests:**
-- Unit tests menggunakan Vitest + React Testing Library
+- Unit tests using Vitest + React Testing Library
 - Test files: api.test.ts, TodoContext.test.tsx, TodoItem.test.tsx
 - 33+ tests covering API, Context, and components
-- Lint checking untuk kualitas kode
+- Lint checking for code quality
 
-#### 2. Jika punya lebih banyak waktu, apa yang akan diperbaiki atau ditambahkan?
+#### 2. If you had more time, what would you improve or add?
 
-**Prioritas Perbaikan:**
+**Priority Improvements:**
 
 1. **Integration Tests**
-   - End-to-end testing dengan Playwright/Cypress
-   - Verifikasi integrasi API
+   - End-to-end testing with Playwright/Cypress
+   - API integration verification
 
-3. **Authentication**
+2. **Authentication**
    - JWT-based auth
    - User login/register
    - Protected routes
 
-4. **Fitur Tambahan**
+3. **Additional Features**
    - Drag-and-drop reordering
-   - Pengingat tanggal jatuh tempo
-   - Todo berulang
+   - Due date reminders
+   - Recurring todos
    - Export/Import (CSV, JSON)
 
-5. **Performa**
-   - Optimasi query database
-   - Memoization frontend
-   - Lazy loading untuk list besar
+4. **Performance**
+   - Database query optimization
+   - Frontend memoization
+   - Lazy loading for large lists
 
-6. **Technical Debt**
+5. **Technical Debt**
    - Error boundary components
-   - Loading skeletons daripada spinners
-   - Pesan error konsisten di seluruh app
+   - Loading skeletons instead of spinners
+   - Consistent error messages across app
 
 ---
 
-## Struktur Project
+## Project Structure
 
 ```
 todo_app/
 ├── backend/
 │   ├── cmd/api/main.go          # Entry point
 │   ├── internal/
-│   │   ├── config/              # Konfigurasi DB
+│   │   ├── config/              # DB config
 │   │   ├── handlers/            # HTTP handlers
-│   │   ├── middleware/          # CORS, dll.
+│   │   ├── middleware/          # CORS, etc.
 │   │   ├── models/              # GORM models
 │   │   ├── repository/          # Data access
 │   │   └── services/            # Business logic
@@ -484,40 +482,40 @@ todo_app/
 │   └── .env
 ├── frontend/
 │   ├── src/
-│   │   ├── components/          # Komponen React
+│   │   ├── components/          # React components
 │   │   ├── context/             # React Context
-│   │   ├── pages/               # Komponen halaman
-│   │   ├── services/            # Pemanggilan API
-│   │   ├── types/               # Tipe TypeScript
+│   │   ├── pages/               # Page components
+│   │   ├── services/            # API calls
+│   │   ├── types/               # TypeScript types
 │   │   ├── styles/              # CSS
 │   │   └── test/                # Test setup
 │   ├── Dockerfile
 │   ├── package.json
 │   └── vite.config.ts
-├── docker-compose.yml           # File compose root
+├── docker-compose.yml           # Root compose file
 ├── README.md
-└── AGENTS.md
+└── .gitignore
 ```
 
 ---
 
 ## Screenshots
 
-Fitur aplikasi:
-- UI bersih dan modern dengan branding gradient
-- Layout dua tab: Tasks dan Categories
-- Todo list dengan indikator priority (merah/kuning/hijau)
-- Fungsi pencarian dan filter
-- Modal forms untuk membuat/mengedit todos
-- Responsive design untuk desktop, tablet, dan mobile
+The application features:
+- Clean, modern UI with gradient branding
+- Two-tab layout: Tasks and Categories
+- Todo list with priority indicators (red/yellow/green)
+- Search and filter functionality
+- Modal forms for creating/editing todos
+- Responsive design for desktop, tablet, and mobile
 
 ---
 
-## Kesimpulan
+## Conclusion
 
-Project ini mengimplementasikan semua persyaratan inti plus sebagian besar fitur bonus:
-- **Skor Dasar**: ~100 poin (semua fitur inti berfungsi)
-- **Poin Bonus**: +28 (backend tests + frontend tests, context, filtering, docker, typescript)
-- **Total Estimasi**: 118-128 poin
+This project implements all core requirements plus most bonus features:
+- **Base Score**: ~100 points (all core features working)
+- **Bonus Points**: +31 (backend tests + frontend tests, context, filtering, docker, typescript)
+- **Total Estimated**: 118-128 points
 
-Aplikasi siap produksi dengan struktur kode yang bersih, error handling yang tepat, dan dokumentasi komprehensif.
+The application is production-ready with clean code structure, proper error handling, and comprehensive documentation.
